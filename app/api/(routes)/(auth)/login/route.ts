@@ -27,7 +27,6 @@ export async function POST(req: Request) {
         const refreshToken = jwt.sign({ data: { email } },
             // @ts-expect-error 
             process.env.JWT_SECRET,
-            { expiresIn: '1h' }
         );
         cookies().set('auth', refreshToken, { httpOnly: true })
         return NextResponse.json({ message: 'Успешный вход' }, { status: 200 })

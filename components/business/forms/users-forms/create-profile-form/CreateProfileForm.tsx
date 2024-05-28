@@ -4,7 +4,6 @@ import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { CreateAccountFormSchema } from "@/schemas/user";
-import { useToast } from "@/components/ui/use-toast"
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import z from 'zod'
@@ -18,7 +17,6 @@ const CreateProfileForm = () => {
     const { Title } = Typography;
 
     const router = useRouter()
-    const { toast } = useToast()
 
     const {
         register,
@@ -32,13 +30,8 @@ const CreateProfileForm = () => {
     const onSubmit = async (data: z.infer<typeof CreateAccountFormSchema>) => {
         setIsLoading(true)
         axios.post<{ message: string }>('http://localhost:3000/api/register', { name: data.name, email: data.email, password: data.password })
-            .then((res) => {
-                toast({ title: res.data.message, description: `Статус код: ${res.status}` })
-                setTimeout(() => { router.push('/home') }, 500)
-            })
-            .catch((err: AxiosError<{ message: string }>) => {
-                toast({ variant: "destructive", title: err.response?.data.message, description: `Статус код: ${err.response?.status}` })
-            })
+            .then((res) => {setTimeout(() => { router.push('/home') }, 500)})
+            .catch((err: AxiosError<{ message: string }>) => {})
             .finally(() => setIsLoading(false))
     }
     return (

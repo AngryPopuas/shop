@@ -3,19 +3,15 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { CreateAccountFormSchema } from "@/schemas/user";
-import { useToast } from "@/components/ui/use-toast"
 import { useState } from "react";
 import z from 'zod'
 import axios, { AxiosError } from "axios";
-import Link from "next/link";
 import { UploadButton } from "@/utils/uploadthing";
 import { ProductSchema } from "@/schemas/product";
 
 
 const CreateProductForm = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
-    const { toast } = useToast()
 
     const {
         register,
@@ -32,12 +28,8 @@ const CreateProductForm = () => {
         setIsLoading(true)
 
         axios.post<{ message: string }>('http://localhost:3000/api/products', data)
-            .then((res) => {
-                toast({ title: res.data.message, description: `Статус код: ${res.status}` })
-            })
-            .catch((err: AxiosError<{ message: string }>) => {
-                toast({ variant: "destructive", title: err.response?.data.message, description: `Статус код: ${err.response?.status}` })
-            })
+            .then((res) => {})
+            .catch((err: AxiosError<{ message: string }>) => {})
             .finally(() => setIsLoading(false))
     }
     console.log(errors)

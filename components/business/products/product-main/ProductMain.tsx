@@ -1,7 +1,6 @@
 import { Button } from "@/components/ui/button"
 import ProductCarousel from "../product-carousel/ProductCarousel"
 import { ProductSchema } from "@/schemas/product"
-import { useToast } from "@/components/ui/use-toast"
 import axios, { AxiosError } from "axios"
 import { useState } from "react"
 import { IProduct } from "@/types"

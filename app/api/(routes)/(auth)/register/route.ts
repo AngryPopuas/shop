@@ -11,20 +11,19 @@ export async function POST(req: Request) {
         const { name, email, password } = await req.json()
         const validation = CreateAccountFormSchema.safeParse({ name, email, password })
 
-        if (!validation.success) return NextResponse.json({ message: 'Не верные данные' }, { status: 400 })
+        if (!validation.success) return NextResponse.json({ message: 'Wrong data' }, { status: 400 })
 
         const client = await clientPromise
         const db = client.db('test')
 
         const isEmailExist = await db.collection('users').findOne({ email })
 
-        if (isEmailExist) return NextResponse.json({ message: 'Данная почта уже существует' }, { status: 400 })
+        if (isEmailExist) return NextResponse.json({ message: 'This email already exist' }, { status: 400 })
 
         const hashedPassword = await bcrypt.hash(password, 10)
         const refreshToken = jwt.sign({ data: { name, email } },
             // @ts-expect-error 
             process.env.JWT_SECRET,
-            { expiresIn: '1h' }
         );
 
         cookies().set('auth', refreshToken, { httpOnly: true })

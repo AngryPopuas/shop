@@ -2,7 +2,6 @@ import Header from "@/components/business/header/Header";
 import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { ThemeProvider } from "next-themes";
-import { Toaster } from "@/components/ui/toaster"
 import "../assets/styles/globals.css";
 
 const inter = Roboto({
@@ -28,7 +27,6 @@ export default function RootLayout({ children, }: Readonly<{ children: React.Rea
           <div className="mx-auto max-w-[1080px] space-y-[45px] px-[50px]">
             <Header />
             {children}
-            <Toaster />
           </div>
         </ThemeProvider>
       </body>

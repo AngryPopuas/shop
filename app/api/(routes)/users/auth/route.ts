@@ -13,7 +13,7 @@ export async function GET(req: Request) {
         const isAuthorized = cookies().get('auth')
 
         if (!isAuthorized) {
-            return NextResponse.json({ message: 'Не авторизован' }, { status: 401 })
+            return NextResponse.json({ message: 'Not authorized' }, { status: 401 })
         }
         const user = await getAccountByToken(isAuthorized.value)
         const userDto = {
@@ -27,11 +27,11 @@ export async function GET(req: Request) {
         }
 
         if (!user) {
-            return NextResponse.json({ message: 'Ошибка авторизации' }, { status: 403 })
+            return NextResponse.json({ message: 'Authorize error' }, { status: 403 })
         }
-        return NextResponse.json({ message: 'Успешно', user: userDto }, { status: 200 })
+        return NextResponse.json({ message: 'Success', user: userDto }, { status: 200 })
 
     } catch (err) {
-        return NextResponse.json({ message: 'Не авторизован' }, { status: 400 })
+        return NextResponse.json({ message: 'Error' }, { status: 400 })
     }
 }
