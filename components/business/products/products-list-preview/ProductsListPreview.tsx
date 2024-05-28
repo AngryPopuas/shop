@@ -4,7 +4,7 @@ import { IProduct } from '@/types'
 
 const ProductsListPreview = ({ props }: { props: Array<IProduct> }) => {
   return (
-    <div className='grid grid-cols-4 gap-y-5 w-full'>
+    <div className='flex flex-col w-full space-y-[15px] px-[20px]'>
       {props.map((item,index) => {
         return (
           <ProductPreview key={index} props={item} />

@@ -1,6 +1,6 @@
 'use client'
+import { ShoppingCartIcon } from "lucide-react"
 import { getUserAccount } from "@/utils/auth"
-import { ModeToggle } from "../theme/mode-toggle/ModeToggle"
 import Link from "next/link"
 import { useEffect, useState } from "react"
 import { IProfile } from "@/types"
@@ -32,15 +32,17 @@ const Header = () => {
         })()
     }, [pathname])
     return (
-        <div className="flex flex-row justify-between items-center p-5 border-b border-input">
-            <Link href={'/home'}><h1>Shop</h1></Link>
+        <div className="flex flex-row justify-between items-center p-5">
+            <div className="flex flex-row w-full justify-start items-center space-x-[25px]">
+                <Link href={'/home'} className=" flex flex-row items-end hover:underline transition-all"><h1>Lab</h1> <h1 className="text-[#fe6400]">Top.</h1></Link>
+                <Link href={'/about'} className=" flex flex-row items-end hover:underline transition-all space-x-[5px]"><h1>About </h1> <h1 className="text-[#fe6400]">us</h1></Link>
+            </div>
             <div className="flex flex-row items-center space-x-[10px]">
                 {isAuthorized
                     ?
                     <>
-                        <Avatar> <AvatarImage src={`${profileImage}`} /></Avatar>
-                        <Link href={'/profile'}><Button variant={'outline'}>Профиль</Button></Link>
-                        <Link href={'/profile/cart'}><Button variant={'outline'}>Корзина</Button></Link>
+                        <Link href={'/profile'}> <Button>Profile</Button> </Link>
+                        <Link href={'/profile/cart'}><Button variant={'yellow'} className="rounded-full w-[40px] h-[40px] relative">CART</Button></Link>
                     </>
                     :
                     isLoading
@@ -48,11 +50,11 @@ const Header = () => {
                         <></>
                         :
                         <>
-                            <Link href={'/auth/login'}><Button variant={'ghost'}>Войти</Button></Link>
-                            <Link href={'/auth/register'}><Button>Регистрация</Button></Link>
+                            <Link href={'/auth/login'}><Button>Sign in</Button></Link>
+                            <Link href={'/auth/register'}><Button variant={'yellow'}>Create account</Button></Link>
                         </>
                 }
-                <ModeToggle />
+
             </div>
         </div>
     )

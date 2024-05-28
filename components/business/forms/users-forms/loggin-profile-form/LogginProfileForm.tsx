@@ -40,15 +40,13 @@ const LogginProfileForm = () => {
     }
     return (
         <form onSubmit={handleSubmit(onSubmit)}>
-            <div className="flex flex-col space-y-5 max-w-[500px] p-5 border border-input rounded-md">
-                <h2>Войдите в аккаунт</h2>
-                <p>Укажите ваши данные...</p>
-                <Input disabled={isLoading}{...register('email')} placeholder="Почта" name="email" type="email" />
+            <div className="flex flex-col space-y-10 min-w-[650px] p-5 border border-input rounded-md">
+                <div className=" flex flex-row items-end space-x-[5px]"><h2>Sign</h2> <h2 className="text-[#fe6400]">IN</h2></div>
+                <Input disabled={isLoading}{...register('email')} placeholder="Email" name="email" type="email" />
                 {errors.email && <span className="text-red-500">{errors.email.message}</span>}
-                <Input disabled={isLoading}{...register('password')} placeholder="Пароль" name="password" type="password" />
+                <Input disabled={isLoading}{...register('password')} placeholder="Password" name="password" type="password" />
                 {errors.password && <span className="text-red-500">{errors.password.message}</span>}
-                <Button disabled={isLoading}>Войти</Button>
-                <Link href={'register'} className="mx-auto"><span className="underline text-blue-600 hover:text-blue-800 visited:text-purple-600">Нет аккаунта?</span></Link>
+                <Button disabled={isLoading} variant={'yellow'}>Sign in</Button>
             </div>
         </form>
     )

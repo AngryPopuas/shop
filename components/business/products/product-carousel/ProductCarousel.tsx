@@ -10,11 +10,11 @@ import Image from "next/image"
 
 const ProductCarousel = ({ props }: { props: Array<string> }) => {
     return (
-        <Carousel className="w-full max-w-[500px]">
+        <Carousel className="w-full">
             <CarouselContent>
                 {props.map((item, index) => (
                     <CarouselItem key={index}>
-                        <div className="p-1 relative w-[500px] h-[500px]">
+                        <div className="p-1 relative w-full h-[500px]">
                             {/* flex aspect-square items-center justify-center p-6 */}
                             <Image className="rounded-md object-contain" src={item} fill alt="Изображение продукта" />
                         </div>

@@ -10,14 +10,14 @@ const ProductCartOptions = ({ products }: { products: Array<IProductCart> }) => 
         (() => {
             let price = 0
             products.forEach((item) => price += item.price * item.amout)
-            setTotalPrice(price)
+            setTotalPrice(Math.floor(price))
         })()
     }, [])
 
     return (
-        <div className="flex flex-col rounded-md px-10 space-y-10 w-full max-w-[450px]">
-            <h2 className="text-2xl font-light">Общая стоимость: {totalPrice}₽</h2>
-            <Button>Оформить</Button>
+        <div className="flex flex-col h-full rounded-md space-y-10 w-full">
+            <h1 className="">Total price: {totalPrice} $</h1>
+            <Button variant={'yellow'}>Buy</Button>
         </div>
     )
 }
