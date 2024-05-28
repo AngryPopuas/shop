@@ -10,8 +10,8 @@ export async function GET(req: Request, context: { params: { id: string } }) {
         const product = await db
             .collection("products")
             .findOne({ _id: new ObjectId(context.params.id) })
-        return NextResponse.json({ product, message: 'Успешно' }, { status: 200 })
+        return NextResponse.json({ product, message: 'Success' }, { status: 200 })
     } catch (err) {
-        return NextResponse.json({ message: 'Ошибка сервера' }, { status: 500 })
+        return NextResponse.json({ message: 'Error' }, { status: 500 })
     }
 }

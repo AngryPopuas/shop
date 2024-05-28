@@ -13,6 +13,7 @@ import Link from "next/link";
 
 const LogginProfileForm = () => {
     const [isLoading, setIsLoading] = useState<boolean>(false)
+    const [isError, setIsError] = useState<{ status: boolean, message: string }>({ status: false, message: '' })
     const router = useRouter()
 
     const {
@@ -27,8 +28,8 @@ const LogginProfileForm = () => {
     const onSubmit = async (data: z.infer<typeof LogginAccountFormSchema>) => {
         setIsLoading(true)
         axios.post<{ message: string }>('http://localhost:3000/api/login', { email: data.email, password: data.password })
-            .then((res) => {setTimeout(() => { router.push('/home') }, 500)})
-            .catch((err: AxiosError<{ message: string }>) => {})
+            .then((res) => { setTimeout(() => { router.push('/home') }, 500) })
+            .catch((err: AxiosError<{ message: string }>) => { setIsError({ status: true, message: err.message }) })
             .finally(() => setIsLoading(false))
     }
     return (
@@ -39,6 +40,7 @@ const LogginProfileForm = () => {
                 {errors.email && <span className="text-red-500">{errors.email.message}</span>}
                 <Input disabled={isLoading}{...register('password')} placeholder="Password" name="password" type="password" />
                 {errors.password && <span className="text-red-500">{errors.password.message}</span>}
+                {isError.status && <span className="text-red-500 border border-red-500 p-5 w-full">{isError.message}</span>}
                 <Button disabled={isLoading} variant={'yellow'}>Sign in</Button>
             </div>
         </form>
